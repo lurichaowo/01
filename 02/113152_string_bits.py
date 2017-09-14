@@ -4,4 +4,6 @@ def string_bits(str):
   while i <= len(str):
     string = string + str[i-1]
     i = i + 2
-  return string
+  return string 
+
+# return str[::2]
