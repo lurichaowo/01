@@ -1,6 +1,10 @@
 def encode_letter(c, r): # rotates lower case letters
     c = c.lower()
     num = ord(c)
+    if (int(r) > 26):
+        r = int(r) % 26
+    if (int(r) < 0):
+        r = 26 +int(r)
     if (num + int(r) > 122): # checks if ord num passes ord of Z
         diff = 122 - int(num) #finds remaining amount till ord(z)
         r = int(r) - diff 
@@ -11,6 +15,10 @@ def encode_letter(c, r): # rotates lower case letters
 
 def encode_upper_letter(c, r): #rotates upper case letters
     num = ord(c)
+    if (int(r) > 26):
+        r = int(r) % 26
+    if (int(r) < 0):
+        r = 26 +int(r)
     if (num + int(r) > 90): # checks if ord num passes ord of Z
         diff = 90 - int(num) #finds remaining amount till ord(z)
         r = int(r) - diff 
