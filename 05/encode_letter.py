@@ -16,3 +16,4 @@ def encode_letter(c, r):
 string = input("enter a letter: ")
 number = input("enter a number: ")
 print(encode_letter(string, number))
+
