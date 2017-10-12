@@ -32,7 +32,7 @@ def build_freq_vecotr(s):
 def print_vector_table(v):
     s = 'abcdefghijklmnopqrstuvwxyz'
     for i in range(26):
-        print (s[i], " " , v[i])
+        print (s[i], ": " , v[i])
 
 r = encode_string("this is a string", 13)
 print(r)

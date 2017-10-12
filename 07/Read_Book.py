@@ -1,6 +1,19 @@
 import math
-real_stats = [0.08167,0.01492,0.02782,0.04253,0.12702,0.02228,0.02015,0.06094,0.06966,0.00153,0.00772,0.04025,0.02406,0.06749,0.07507,0.01929,0.00095,0.05987,0.06327,0.09056,0.02758,0.00978,0.02360,0.00150,0.01974,0.00074]
 
+v = []
+
+def main():
+    f = input("enter the file name: ")
+    num = input("enter a number to rotate it by: ")
+    flz = open(f)
+    read = flz.read()
+    v = create_freq_vector(read)
+    print(v)
+    r_str = encode_string(read, int(num))
+    print(r_str)
+    d_str = decode(read)
+    print(d_str)
+    
 def rotate_char(c,r):
     """
     Rotates character c by amount r. Wraps if past z
@@ -23,6 +36,15 @@ def encode_string(s,r):
         result = result + letter
     return result
 
+def create_freq_vector(s): 
+    str = s.lower()
+    spaces = str.count(' ')
+    num_letters = len(str) - spaces
+    v =[]
+    for letter in  'abcdefghijklmnopqrstuvwxyz':
+        v.append(str.count(letter) / num_letters)
+    return v
+
 def distance(l1,l2):
     """
     Euclidean distance between l1 and l2. If the lists are of 
@@ -36,20 +58,6 @@ def distance(l1,l2):
         sum = sum + (l1[i]-l2[i])*(l1[i]-l2[i])
     d = math.sqrt(sum)
     return d
-    
-def build_frequency_vector(s):
-    # count the letters in the string
-    spaces = s.count(' ')
-    num_letters = len(s) - spaces
-    v=[]
-    for letter in "abcdefghijklmnopqrstuvwxyz":
-        v.append(s.count(letter) / num_letters)
-    return v
-
-def print_vector_table(v):
-    s="abcdefghijklmnopqrstuvwxyz"
-    for i in range(26):
-        print(s[i]," : ",v[i])
 
 def decode(s):
     l = []
@@ -60,11 +68,11 @@ def decode(s):
         i = i + 1
     f = []
     for sent in l:
-        f.append(build_frequency_vector(sent))
+        f.append(create_freq_vector(sent))
     d = []
     for freq in f:
-        d.append(distance(real_stats, freq))
-
+        d.append(distance(v, freq))
+    print(d)
     lower = d[0]
     count = 1
     lowest = 0
@@ -78,20 +86,5 @@ def decode(s):
             pass
     result = l[lowest]
     return result
-    
 
-s = "this is a longer sentence with more letters so hopefully it will be closer to the real distribution"
-
-r = encode_string(s,3)
-
-print(s)
-print(r)
-
-f = build_frequency_vector(s)
-
-print(distance(real_stats,f))
-print("\n--------------------------------------\n")
-f = build_frequency_vector(r)
-print(distance(real_stats,f))
-print("\n--------------------------------------\n")
-print(decode(s))
+main()
