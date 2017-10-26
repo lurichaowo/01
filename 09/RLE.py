@@ -6,7 +6,8 @@ def encode(s):
     if s[num] == i:
       count += 1
       if (num == len(s) - 1 or s[num + 1] != i):
-        listed.append(count)
+        if (count > 1):  
+            listed.append(count)
         listed.append(i)
         count = 0
   return listed
