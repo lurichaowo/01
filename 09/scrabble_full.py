@@ -38,51 +38,46 @@ def print_board(b):
         print ( ''.join(line))
         
 def add_word_across(board, word, r, c):
+    string = []
     scores = 0
     i = 0
     while i < len(word):
         for let in word:
-            if (board[r][c+i] == 'T'):
-                scores = score(let) * 3
-            elif (board[r][c+i] == 'D'):
-                scores = score(let) * 2
-            elif (board[r][c+i] == 't'):
-                scores = score(word) * 3
-            elif (board[r][c+i] == 'd'):
-                scores = score(word) * 2
-            else:
-                scores = score(word)
+            string.append(board[r][c+i])
             board[r][c+i] = let
             i += 1
+    scores = score(string, word)
     print(scores)
     
 def add_word_down(board, word, r, c):
+    string = []
     scores = 0
     i = 0
     while i < len(word):
         for let in word:
-            if (board[r+i][c] == 'T'):
-                scores = score(let) * 3
-            elif (board[r+i][c] == 'D'):
-                scores = score(let) * 2
-            elif (board[r+i][c] == 't'):
-                scores = score(word) * 3
-            elif (board[r+i][c] == 'd'):
-                scores = score(word) * 2
-            else:
-                scores = score(word)
+            string.append(board[r+i][c])
             board[r+i][c] = let
             i += 1
+    scores = score(string, word)
     print(scores)
 
-def score(w):
-  score = 0
-  w = w.lower()
-  for i in w:
-    for key,val in dict.items():
-      if i in key:
-        score += int(val)
-  return score
+def score(s,w):
+    score = 0
+    w = w.lower()
+    for index,i in enumerate(w):
+        for key,val in dict.items():
+          if i in key:
+            if (s[index] == 'T'):
+                score += int(val) * 3
+            elif (s[index] == 'D'):
+                score += int(val) * 2
+            else:
+                score += int(val)
+    if "d" in s:
+        score = score * 2
+    elif "t" in s:
+        score = score * 3
+    return score
     
     
 b = make_scrabble_board()
