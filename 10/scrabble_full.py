@@ -82,6 +82,6 @@ def score(s,w):
     
 b = make_scrabble_board()
 print_board(b)
-add_word_across(b, "hello", 1,2)
+add_word_across(b, "hello", 1,1)
 add_word_down(b, "super", 5,4)
 print_board(b)
