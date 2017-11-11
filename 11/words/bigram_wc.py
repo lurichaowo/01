@@ -9,20 +9,17 @@ def remove_non_alpha(w): # return word w/o punctuation
             result = result + l
     return result
 
-def listify(wordlist): # counts number of words
-    '''
-        input: list of word
-        mid: if word doesnt exist in dict, creates new key with value of 0 (then add 1)
-        output: returns dict of words and count of word
-    '''
+def binary_listify(wordlist):
     d={}
     for index,w in enumerate(wordlist):
-        d.setdefault(w,[])
-        if index == len(wordlist)-1:
-            word = d[w]
-            d[w] = (word[:])
-        else:
-            d[w].append(wordlist[index+1])
+        if index < len(wordlist) -2:
+            new_word = w + " " + wordlist[index+1]
+            d.setdefault(new_word,[])
+            if index == len(wordlist)-2:
+                word = d[new_word]
+                d[new_word] = (word[:])
+            else:
+                d[new_word].append(wordlist[index+2])
     '''
     for i in range(',len(wordlist)):
         w1 = wordlist[i-1]
@@ -43,8 +40,8 @@ def main(f):
         word = word.lower()
         word = remove_non_alpha(word)
         l.append(word)
-    d = listify(l)
-    return d
+    d2 = binary_listify(l)
+    return d2
 
 
 
