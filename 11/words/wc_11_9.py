@@ -1,3 +1,5 @@
+import random
+
 def remove_non_alpha(w): # return word w/o punctuation
     '''
         input: word
@@ -32,25 +34,25 @@ def listify(wordlist): # counts number of words
     '''
     return d
 
-def binary_listify(wordlist):
+def listify2(wordlist):
     d={}
     for index,w in enumerate(wordlist):
-        if index < len(wordlist) -2:
-            new_word = w + " " + wordlist[index+1]
-            d.setdefault(new_word,[])
-            if index == len(wordlist)-2:
-                word = d[new_word]
-                d[new_word] = (word[:])
-            else:
-                d[new_word].append(wordlist[index+2])
-    '''
-    for i in range(',len(wordlist)):
-        w1 = wordlist[i-1]
-        w2 = wordlist[i]
-        d.setdefault(w1, [])
-        d[w1].append(w2)
-    '''
-    return d
+        d.setdefault(w,[])
+        if index == len(wordlist)-1:
+            word = d[w]
+            d[w] = (word[:])
+        else:
+            d[w].append(wordlist[index+1])
+
+def generate_text(d, start_word, length = 50):
+    wordlist =[]
+    next = start_word
+    for i in range(length):
+        if next not in d:
+            break
+        wordlist.append(next)
+        next = random.choice(d[next])
+    return wordlist
 
 def main(f):
     '''
@@ -64,10 +66,11 @@ def main(f):
         word = remove_non_alpha(word)
         l.append(word)
     d = listify(l)
-    d2 = binary_listify(l)
-    return d2
+    return d
 
 
 
 d = main("hamlet.txt")
+v = generate_text(d,'to')
 print(d)
+print(' '.join(v))
