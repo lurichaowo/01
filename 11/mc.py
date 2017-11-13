@@ -1,5 +1,3 @@
-import random
-
 def remove_non_alpha(w): # return word w/o punctuation
     '''
         input: word
@@ -34,25 +32,28 @@ def listify(wordlist): # counts number of words
     '''
     return d
 
-def listify2(wordlist):
+def multi_listify(wordlist, n):
+    '''
+        input will print out how many " " + grams you want of a text ie 2 = bigram, 3 = trigram, etc.
+    '''
     d={}
     for index,w in enumerate(wordlist):
-        d.setdefault(w,[])
-        if index == len(wordlist)-1:
-            word = d[w]
-            d[w] = (word[:])
-        else:
-            d[w].append(wordlist[index+1])
-
-def generate_text(d, start_word, length = 50):
-    wordlist =[]
-    next = start_word
-    for i in range(length):
-        if next not in d:
-            break
-        wordlist.append(next)
-        next = random.choice(d[next])
-    return wordlist
+        new_word = ''
+        if index < len(wordlist) - n:
+            i = 1
+            while i < n+1:
+                if i == 1:
+                    new_word = wordlist[index+n-i]
+                else:
+                    new_word = wordlist[index+n-i] + " " + new_word
+                i += 1
+            d.setdefault(new_word,[])
+            if index == len(wordlist)-n:
+                word = d[new_word]
+                d[new_word] = (word[:])
+            else:
+                d[new_word].append(wordlist[index+n])
+    return d
 
 def main(f):
     '''
@@ -65,12 +66,11 @@ def main(f):
         word = word.lower()
         word = remove_non_alpha(word)
         l.append(word)
-    d = listify(l)
-    return d
+    num = input("How many-grams do you want?: ")
+    d3 = multi_listify(l, int(num))
+    return d3
 
 
 
 d = main("hamlet.txt")
-v = generate_text(d,'to')
 print(d)
-print(' '.join(v))
