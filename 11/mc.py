@@ -39,7 +39,7 @@ def multi_listify(wordlist, n):
     d={}
     for index,w in enumerate(wordlist):
         new_word = ''
-        if index < len(wordlist) - n:
+        if index <= len(wordlist) - n:
             i = 1
             while i < n+1:
                 if i == 1:

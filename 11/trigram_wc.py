@@ -35,7 +35,7 @@ def listify(wordlist): # counts number of words
 def tri_listify(wordlist):
     d={}
     for index,w in enumerate(wordlist):
-        if index < len(wordlist) -3:
+        if index <= len(wordlist) -3:
             new_word = w + " " + wordlist[index+1] + " " + wordlist[index+2]
             d.setdefault(new_word,[])
             if index == len(wordlist)-3:
