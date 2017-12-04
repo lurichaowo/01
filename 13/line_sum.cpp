@@ -38,4 +38,5 @@ int main(){
 	std::cout << std::boolalpha << c << std::endl;
 	std::cout << std::boolalpha << d << std::endl;
 	std::cout << std::boolalpha << e << std::endl;
+	return 0;
 }
