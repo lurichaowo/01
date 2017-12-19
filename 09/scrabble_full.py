@@ -8,7 +8,7 @@ dict = {"aeioulnrst":"1",
         "bcmp":"3", 
         "fhvwy":"4",
         "k":"5",
-        "kx":"8",
+        "jx":"8",
         "qz":"10"}
 
 def make_scrabble_board():
